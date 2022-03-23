@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>To Do List</title>
+</head>
+
+<body>
+    <header >
+        <h1>To Do List</h1>
+    </header>
+    <br>
+    <div class="box">
+        <form method="POST" action="/add/save">
+            <input type="text" name="task" placeholder="Digite sua tarefa..." id="text">
+            <button class="add">Adicionar</button>
+        </form>
+        <br>
+        <div class="bx">
+            <%let i = 0%>
+            <%list.forEach(task =>{ %>
+
+                <div class="container" id="area<%=i%>" >
+                    <input type="checkbox" class="check" onclick="finish()"> 
+                    <label id="task<%=i%>"><%=task.task%></label> 
+                    <div class="bx">    
+                        <form method="POST" action="/delete">
+                            <input type="hidden" name="id" value="<%= task.id%>">
+                            <button class="img"><img src="/img/lixeira-de-reciclagem.png" id="icon<%=i%>"></button>
+                        </form>
+                </div> </div>
+                <%i++;%>
+            <% }) %>
+        </div>
+    </div>
+</body>
+<script>
+    let finish = () =>{
+		var elements = document.getElementsByClassName("check"); 
+					
+			for(i = 0; i < elements.length; i++){ 
+				if(elements[i].checked){
+						let n = document.getElementById("task"+ i);
+                        n.style.color = '#5dc943';
+						
+					}else{
+                        let n = document.getElementById("task"+ i);
+                        n.style.color = '#6d6a6a';
+                    }
+			}
+    }
+</script>
+</html>
+
+
